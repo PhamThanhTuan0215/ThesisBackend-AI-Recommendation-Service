@@ -1,0 +1,18 @@
+# Web framework
+fastapi
+uvicorn
+
+# Data & ML
+pandas
+faiss-cpu
+sentence-transformers
+scikit-learn
+
+# NLP & toán học (bạn có dùng sympy)
+sympy
+
+# AI API client
+requests
+
+# Env management
+python-dotenv
