@@ -1,5 +1,5 @@
 # Torch CPU only (bắt buộc đặt trước sentence-transformers)
-torch==2.2.2
+torch==2.1.2+cpu
 numpy<2
 
 # Web framework
@@ -20,3 +20,6 @@ python-dotenv
 
 # NLP model
 sentence-transformers
+
+# Chỉ định index cho bản CPU
+--extra-index-url https://download.pytorch.org/whl/cpu
