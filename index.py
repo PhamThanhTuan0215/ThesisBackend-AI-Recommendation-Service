@@ -1,5 +1,7 @@
+print("✅ App đang khởi động...")
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from typing import List, Optional
 
@@ -26,7 +28,7 @@ def root():
     return JSONResponse(content=result, status_code=200)
 
 @app.post("/suggestions")
-def predict_disease(input: SymptomInput):
+async def predict_disease(input: SymptomInput):
     
     print(f"🔍 Nhận được yêu cầu với đầu vào: {input}")
     
@@ -39,7 +41,9 @@ def predict_disease(input: SymptomInput):
         return JSONResponse(content=result, status_code=400)
     
     # xử lý đầu vào
-    symptoms_input, message_error = get_symptoms_input_from_user_input(input.user_input.strip())
+    symptoms_input, message_error = await run_in_threadpool(
+        get_symptoms_input_from_user_input, input.user_input.strip()
+    )
     
     if message_error:
         result = {
@@ -59,11 +63,8 @@ def predict_disease(input: SymptomInput):
     
     print(f"🔍 Đang xử lý {len(symptoms_input)} triệu chứng: {symptoms_input}")
 
-    data = get_all_data_suggestions(
-        symptoms_input=symptoms_input,
-        min_score=input.min_score,
-        top_k=input.top_k
-    )
+    data = await run_in_threadpool(get_all_data_suggestions, symptoms_input, input.min_score, input.top_k)
+
 
     if not data:
         result = {
