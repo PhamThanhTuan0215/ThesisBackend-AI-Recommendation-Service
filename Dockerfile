@@ -31,4 +31,4 @@ COPY corpus_lines.csv ./
 ENV PORT=10000
 
 # Chạy ứng dụng
-CMD ["uvicorn", "index:app", "--host", "0.0.0.0", "--port", "${PORT}"]
+CMD ["sh", "-c", "uvicorn index:app --host 0.0.0.0 --port $PORT"]
