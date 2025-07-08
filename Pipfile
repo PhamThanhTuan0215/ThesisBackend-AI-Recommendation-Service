@@ -9,6 +9,7 @@ verify_ssl = true
 name = "downloadpytorch"
 
 [packages]
+pipenv = "~=2023.12"
 torch = "==2.1.2+cpu"
 numpy = "<2"
 fastapi = "*"
