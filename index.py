@@ -41,9 +41,12 @@ async def predict_disease(input: SymptomInput):
         return JSONResponse(content=result, status_code=400)
     
     # xử lý đầu vào
-    symptoms_input, message_error = await run_in_threadpool(
-        get_symptoms_input_from_user_input, input.user_input.strip()
-    )
+    # symptoms_input, message_error = await run_in_threadpool(
+    #     get_symptoms_input_from_user_input, input.user_input.strip()
+    # )
+
+    symptoms_input = [s.strip() for s in input.user_input.split("và") if s.strip()]
+    message_error = None
     
     if message_error:
         result = {
