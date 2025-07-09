@@ -1,5 +1,6 @@
 print("✅ App đang khởi động...")
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
@@ -14,6 +15,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI(title="Gợi ý thuốc theo triệu chứng")
+
+# Cấu hình CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # uvicorn index:app --reload --port 8088
 

@@ -113,7 +113,7 @@ def get_all_data_suggestions(symptoms_input, min_score=0.6, top_k=3):
 
             pair_key = (user_input_symptom, matched_symptom)
             if pair_key not in shown_pairs:
-                matched_logs.append(f"Bạn nhập: '{user_input_symptom}' → Khớp gần với: '{matched_symptom}' (score: {score * 100:.2f}%)")
+                matched_logs.append(f"Bạn nhập: '{user_input_symptom}' → Khớp gần với: '{matched_symptom}' ({score * 100:.2f}%)")
                 matched_symptoms.append(matched_symptom)
                 shown_pairs.add(pair_key)
 
